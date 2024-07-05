@@ -1,0 +1,48 @@
+<!-- res/layout/item_grid.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="@color/white"
+    android:padding="8dp">
+
+
+    <ImageView
+        android:id="@+id/itemImage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:text="Item Name"
+        android:textSize="16sp"
+        android:textColor="@color/grey"
+        android:textStyle="bold" />
+
+    <RatingBar
+        android:id="@+id/itemRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:numStars="5"
+        android:backgroundTint="@color/yellow"
+        android:progressTint="@color/yellow"
+        android:stepSize="0.5"
+        android:rating="4.5"
+        style="?android:attr/ratingBarStyleSmall" />
+
+    <TextView
+        android:id="@+id/itemPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:text="Item Price"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+</LinearLayout>
