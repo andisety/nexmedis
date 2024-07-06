@@ -8,12 +8,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nexmedis.model.ApiResult
 import com.example.nexmedis.model.response.ResponseProducts
+import com.example.nexmedis.model.response.ResponseProductsItem
 import com.example.nexmedis.network.ApiConfig
 import kotlinx.coroutines.launch
 
 class NexViewModel:ViewModel() {
     private val _products =MutableLiveData<ApiResult<ResponseProducts>>()
     val products:LiveData<ApiResult<ResponseProducts>> =_products
+
+    private val _filteredProducts = MutableLiveData<List<ResponseProductsItem>>()
+    val filteredProducts: LiveData<List<ResponseProductsItem>> get() = _filteredProducts
 
     init {
         getProducts()
@@ -35,6 +39,14 @@ class NexViewModel:ViewModel() {
             }catch (e:Exception){
                 _products.value = ApiResult.Error(e.message.toString())
             }
+        }
+    }
+    fun filterProducts(category: String) {
+        val productsList = (_products.value as? ApiResult.Success)?.data ?: return
+        _filteredProducts.value = if (category == "all") {
+            productsList
+        } else {
+            productsList.filter { it.category == category }
         }
     }
 }

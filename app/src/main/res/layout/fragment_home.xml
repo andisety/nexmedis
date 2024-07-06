@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,27 +26,65 @@
         android:text="Explore\nColections" />
 
     <com.google.android.material.chip.ChipGroup
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
         android:id="@+id/chipGroup"
-        android:layout_width="wrap_content"
+        android:layout_below="@id/tvProlog"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvProlog">
+        app:singleSelection="true"
+        app:selectionRequired="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip1"
+            android:id="@+id/chip_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chip 1" />
+            android:text="All"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            app:chipStrokeWidth="1dp"
+            app:closeIconVisible="false" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip2"
+            android:id="@+id/chip_electronics"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chip 2" />
+            android:text="Electronics"
+            app:chipStrokeWidth="1dp"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+
+            app:closeIconVisible="false" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_jewelery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jewelery"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+
+            app:chipStrokeWidth="1dp"
+            app:closeIconVisible="false" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_mens_clothing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Men's Clothing"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+
+            app:chipStrokeWidth="1dp"
+            app:closeIconVisible="false" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_womens_clothing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Women's Clothing"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+
+            app:chipStrokeWidth="1dp"
+            app:closeIconVisible="false" />
     </com.google.android.material.chip.ChipGroup>
-
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginLeft="10dp"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
