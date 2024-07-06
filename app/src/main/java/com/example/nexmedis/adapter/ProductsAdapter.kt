@@ -12,9 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nexmedis.R
 import com.example.nexmedis.model.response.ResponseProductsItem
+import com.squareup.picasso.Picasso
 
 
-class ProductsAdapter(private var products: List<ResponseProductsItem>) : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
+class ProductsAdapter(
+    private var products: List<ResponseProductsItem>,
+    private val listener:ListenerMovePage
+) : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemImage: ImageView = view.findViewById(R.id.itemImage)
@@ -35,10 +39,19 @@ class ProductsAdapter(private var products: List<ResponseProductsItem>) : Recycl
         holder.itemImageBg.setBackgroundResource(bgRes)
 
         val item = products[position]
-        Glide.with(holder.itemView.context).load(item.image).into(holder.itemImage)
+
+//        Glide.with(holder.itemView.context)
+//            .load(item.image)
+//            .into(holder.itemImage)
+        Picasso.get()
+            .load(item.image)
+            .into(holder.itemImage)
         holder.itemName.text = item.title
         holder.itemRating.rating = item.rating.rate.toFloat()
         holder.itemPrice.text = "$${item.price.toString()}"
+        holder.itemView.setOnClickListener {
+            listener.onKlik(item)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -46,7 +59,12 @@ class ProductsAdapter(private var products: List<ResponseProductsItem>) : Recycl
     }
     fun filterList(filteredList: List<ResponseProductsItem>) {
         products = filteredList
-        Log.d("ProductsAdapter", "Filter list called with size: ${filteredList.size}")
+        Log.d("GA<BAR", filteredList[0].image)
         notifyDataSetChanged()
     }
+
+    interface ListenerMovePage{
+        fun onKlik(product:ResponseProductsItem)
+    }
+
 }

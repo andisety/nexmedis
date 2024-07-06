@@ -66,4 +66,6 @@ dependencies {
     implementation ("androidx.activity:activity-ktx:$1.9.0")
 
     implementation ("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.squareup.picasso:picasso:2.8")
 }

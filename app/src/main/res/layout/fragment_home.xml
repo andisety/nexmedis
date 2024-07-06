@@ -25,6 +25,16 @@
         android:layout_marginLeft="20dp"
         android:text="Explore\nColections" />
 
+    <androidx.appcompat.widget.SearchView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        app:queryHint="Search products"
+
+        android:layout_toEndOf="@+id/tvProlog" />
+
+
     <com.google.android.material.chip.ChipGroup
         android:layout_marginHorizontal="20dp"
         android:id="@+id/chipGroup"

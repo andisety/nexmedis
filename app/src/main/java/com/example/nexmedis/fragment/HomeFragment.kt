@@ -1,5 +1,6 @@
 package com.example.nexmedis.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.example.nexmedis.adapter.ProductsAdapter
 import com.example.nexmedis.databinding.FragmentHomeBinding
 import com.example.nexmedis.model.ApiResult
 import com.example.nexmedis.model.response.ResponseProductsItem
+import com.example.nexmedis.ui.DetailActivity
 import com.google.android.material.chip.ChipGroup
 
 
@@ -71,27 +73,17 @@ class HomeFragment : Fragment() {
 
     }
 
-
-//    fun setUpRecyclerView(products:List<ResponseProductsItem>){
-//        recyclerView = binding.recyclerView
-//        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-//        productsAdapter= ProductsAdapter(products)
-//        recyclerView.adapter=productsAdapter
-//        val chipGroup: ChipGroup = binding.chipGroup
-//        chipGroup.setOnCheckedChangeListener { _, checkedId ->
-//            when (checkedId) {
-//                R.id.chip_all -> productsAdapter.filterList(products)
-//                R.id.chip_electronics -> filterByCategory("electronics",products)
-//                R.id.chip_jewelery -> filterByCategory("jewelery",products)
-//                R.id.chip_mens_clothing -> filterByCategory("men's clothing",products)
-//                R.id.chip_womens_clothing -> filterByCategory("women's clothing",products)
-//            }
-//        }
-//    }
 private fun setUpRecyclerView() {
     val recyclerView = binding.recyclerView
     recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-    productsAdapter = ProductsAdapter(emptyList())
+    productsAdapter = ProductsAdapter(emptyList(),object:ProductsAdapter.ListenerMovePage{
+        override fun onKlik(product: ResponseProductsItem) {
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra("DATA",product)
+            startActivity(intent)
+        }
+
+    })
     recyclerView.adapter = productsAdapter
 
     val chipGroup: ChipGroup = binding.chipGroup
