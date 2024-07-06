@@ -38,12 +38,7 @@ class ProductsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bgRes = if (position % 2 == 0) R.drawable.bg_left else R.drawable.bg_right
         holder.itemImageBg.setBackgroundResource(bgRes)
-
         val item = products[position]
-
-//        Glide.with(holder.itemView.context)
-//            .load(item.image)
-//            .into(holder.itemImage)
         Picasso.get()
             .load(item.image)
             .into(holder.itemImage)

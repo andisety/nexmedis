@@ -18,15 +18,20 @@ abstract class ProductDatabase:RoomDatabase() {
         @Volatile
         private var INSTANCE: ProductDatabase? = null
 
-        fun getDatabase(context: Context, applicationScope: CoroutineScope): ProductDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
+        @JvmStatic
+        fun getDatabase(context: Context): ProductDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance!=null){
+                return tempInstance
+            }
+            synchronized(this){
+                val instance=Room.databaseBuilder(
                     context.applicationContext,
                     ProductDatabase::class.java,
                     "product_database"
                 ).build()
-                INSTANCE = instance
-                instance
+                INSTANCE=instance
+                return instance
             }
 
         }

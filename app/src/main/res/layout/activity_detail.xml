@@ -102,6 +102,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
+                    android:id="@+id/ivFav"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:scaleType="fitCenter"

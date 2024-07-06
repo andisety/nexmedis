@@ -3,32 +3,47 @@ package com.example.nexmedis.fragment
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.nexmedis.MyApplication
+import com.example.nexmedis.database.ProductDao
 import com.example.nexmedis.database.ProductDatabase
+import com.example.nexmedis.database.ProductEntity
 import com.example.nexmedis.model.response.Product
-import com.example.nexmedis.network.ProductRepository
+import com.example.nexmedis.network.local.ProductRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: ProductRepository
-    val allProducts: LiveData<List<Product>>
+
+    private val repository:ProductRepository
+     val allData:LiveData<List<ProductEntity>>
 
     init {
-        val productsDao = (application as MyApplication).database.productDao()
-        repository = ProductRepository(productsDao)
-        allProducts = repository.allProducts
+        val productDao=ProductDatabase.getDatabase(application).productDao()
+        repository=ProductRepository(productDao)
+        allData=repository.getAllProducts()
     }
 
-    fun insert(product: Product) = viewModelScope.launch {
-        repository.insert(product)
+
+    fun insert(product: ProductEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insert(product)
+        }
     }
 
-    fun getProductsByCategory(category: String): LiveData<List<Product>> {
-        return repository.getProductsByCategory(category)
-    }
+    fun getAllproducts()=
+        viewModelScope.launch {
+            repository.getAllProducts()
+        }
 
-    fun deleteAll() = viewModelScope.launch {
-        repository.deleteAll()
-    }
 }
+//class ViewModelFactory(private val repository: ProductRepository) : ViewModelProvider.Factory {
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        if (modelClass.isAssignableFrom(ProductViewModel::class.java)) {
+//            @Suppress("UNCHECKED_CAST")
+//            return ProductViewModel(repository) as T
+//        }
+//        throw IllegalArgumentException("Unknown ViewModel class")
+//    }
+//}
