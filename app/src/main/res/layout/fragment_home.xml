@@ -20,25 +20,33 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="26sp"
+        android:textSize="35sp"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="20dp"
         android:text="Explore\nColections" />
 
     <androidx.appcompat.widget.SearchView
-        android:layout_marginTop="20dp"
+        android:id="@+id/searchView"
+        android:layout_marginHorizontal="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        app:queryHint="Search products"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:iconifiedByDefault="false"
+        android:layout_toEndOf="@+id/tvProlog"
+        android:background="@drawable/bg_btn_black_round"
+        app:queryHint="Search products"/>
 
-        android:layout_toEndOf="@+id/tvProlog" />
-
-
+<HorizontalScrollView
+    android:paddingHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    android:id="@+id/wrapperChipGrp"
+    android:layout_below="@id/tvProlog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <com.google.android.material.chip.ChipGroup
-        android:layout_marginHorizontal="20dp"
         android:id="@+id/chipGroup"
-        android:layout_below="@id/tvProlog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:singleSelection="true"
@@ -93,12 +101,15 @@
             app:chipStrokeWidth="1dp"
             app:closeIconVisible="false" />
     </com.google.android.material.chip.ChipGroup>
+</HorizontalScrollView>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginBottom="80dp"
         android:layout_marginLeft="10dp"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/chipGroup" />
+        android:layout_below="@+id/wrapperChipGrp" />
 
 </RelativeLayout>

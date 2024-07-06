@@ -13,8 +13,8 @@ import com.example.nexmedis.network.ApiConfig
 import kotlinx.coroutines.launch
 
 class NexViewModel:ViewModel() {
-    private val _products =MutableLiveData<ApiResult<ResponseProducts>>()
-    val products:LiveData<ApiResult<ResponseProducts>> =_products
+    private val _products =MutableLiveData<ApiResult<List<ResponseProductsItem>>>()
+    val products:LiveData<ApiResult<List<ResponseProductsItem>>> =_products
 
     private val _filteredProducts = MutableLiveData<List<ResponseProductsItem>>()
     val filteredProducts: LiveData<List<ResponseProductsItem>> get() = _filteredProducts
@@ -23,7 +23,7 @@ class NexViewModel:ViewModel() {
         getProducts()
     }
 
-    private fun getProducts() {
+     fun getProducts() {
         viewModelScope.launch {
             _products.value = ApiResult.Loading
             try {
@@ -49,4 +49,30 @@ class NexViewModel:ViewModel() {
             productsList.filter { it.category == category }
         }
     }
+    fun filterProductsSearch(title: String) {
+        val productsList = (_products.value as? ApiResult.Success)?.data ?: return
+        _filteredProducts.value = if (title == "all") {
+            productsList
+        } else {
+            productsList.filter { it.title.contains(title) }
+        }
+    }
+
+//    fun seachProducts(query: String) {
+//        val currentList = (_products.value as? ApiResult.Success<List<ResponseProductsItem>>)?.data ?: return
+//        val filteredList = if (query.isNotEmpty()) {
+//            currentList.filter { product ->
+////                product..contains(query, ignoreCase = true)
+//                product.title.contains(query,ignoreCase=true)
+//            }
+//        } else {
+//            currentList
+//        }
+//        _products.value = ApiResult.Success(filteredList)
+//    }
+//    fun restoreOriginalList() {
+//        val currentList = (_products.value as? ApiResult.Success<List<ResponseProductsItem>>)?.data ?: return
+//        _products.value = ApiResult.Success(currentList)
+//    }
+
 }

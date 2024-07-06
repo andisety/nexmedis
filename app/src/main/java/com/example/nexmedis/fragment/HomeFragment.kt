@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nexmedis.R
@@ -29,6 +30,7 @@ class HomeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var productsAdapter: ProductsAdapter
     private lateinit var nexViewModel: NexViewModel
+    private lateinit var  chipGroup: ChipGroup
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,14 +46,43 @@ class HomeFragment : Fragment() {
         setUpRecyclerView()
         setUpChipGroup()
 
+
+        val searchView=binding.searchView
+//        searchView.setIconifiedByDefault(false)
+//        searchView.requestFocus()
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.wrapperChipGrp.visibility = View.GONE
+                if (query!=null){
+                    val products = (nexViewModel.products.value as? ApiResult.Success)?.data
+                    if (products != null) {
+                        searchByTitle(query,products)
+                    }
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+
+                }
+                return true
+            }
+        })
+        binding.searchView.setOnCloseListener {
+            binding.wrapperChipGrp.visibility = View.VISIBLE
+            nexViewModel.getProducts()
+            chipGroup.clearCheck()
+            true
+        }
+
+
         nexViewModel.products.observe(viewLifecycleOwner){products->
             when(products){
                 is ApiResult.Success->{
                     Log.d("ProductFragment", "Products received: ${products.data.size}")
                     showLoading(false)
-                    // Init RecyclerView once
                     setUpRecyclerView()
-                    // Set filtered products to full list initially
                     nexViewModel.filterProducts("all")
 
                 }
@@ -73,33 +104,23 @@ class HomeFragment : Fragment() {
 
     }
 
-private fun setUpRecyclerView() {
-    val recyclerView = binding.recyclerView
-    recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-    productsAdapter = ProductsAdapter(emptyList(),object:ProductsAdapter.ListenerMovePage{
-        override fun onKlik(product: ResponseProductsItem) {
-            val intent = Intent(requireContext(), DetailActivity::class.java)
-            intent.putExtra("DATA",product)
-            startActivity(intent)
-        }
+    private fun setUpRecyclerView() {
+        val recyclerView = binding.recyclerView
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        productsAdapter = ProductsAdapter(emptyList(),object:ProductsAdapter.ListenerMovePage{
+            override fun onKlik(product: ResponseProductsItem) {
+                val intent = Intent(requireContext(), DetailActivity::class.java)
+                intent.putExtra("DATA",product)
+                startActivity(intent)
+            }
 
-    })
-    recyclerView.adapter = productsAdapter
+        })
+        recyclerView.adapter = productsAdapter
 
-    val chipGroup: ChipGroup = binding.chipGroup
-    chipGroup.setOnCheckedChangeListener { _, checkedId ->
-        Log.d("ProductFragment", "Chip checked: $checkedId")
-        when (checkedId) {
-            R.id.chip_all -> nexViewModel.filterProducts("all")
-            R.id.chip_electronics -> nexViewModel.filterProducts("electronics")
-            R.id.chip_jewelery -> nexViewModel.filterProducts("jewelery")
-            R.id.chip_mens_clothing -> nexViewModel.filterProducts("men's clothing")
-            R.id.chip_womens_clothing -> nexViewModel.filterProducts("women's clothing")
-        }
     }
-}
+
         private fun setUpChipGroup() {
-        val chipGroup: ChipGroup = binding.chipGroup
+         chipGroup = binding.chipGroup
         chipGroup.setOnCheckedChangeListener { _, checkedId ->
             val products = (nexViewModel.products.value as? ApiResult.Success)?.data ?: return@setOnCheckedChangeListener
             Log.d("ProductFragment", "Chip checked: $checkedId")
@@ -116,6 +137,12 @@ private fun setUpRecyclerView() {
     private fun filterByCategory(category: String,products:List<ResponseProductsItem>) {
         val filteredList = products.filter { it.category == category }
         Log.d("ProductFragment", "Filtered list size: ${filteredList.size}")
+        productsAdapter.filterList(filteredList)
+    }
+
+    private fun searchByTitle(title: String,products:List<ResponseProductsItem>) {
+        val filteredList = products.filter { it.title.contains(title,ignoreCase = true)}
+        Log.d("ProductFragment", "search list size: ${filteredList.size}")
         productsAdapter.filterList(filteredList)
     }
 
