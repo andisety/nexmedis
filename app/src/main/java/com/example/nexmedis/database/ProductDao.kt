@@ -15,6 +15,9 @@ interface ProductDao {
     @Query("SELECT * FROM products")
      fun getAllProducts(): LiveData<List<ProductEntity>>
 
+    @Query("SELECT id FROM products")
+    fun getIdProducts(): LiveData<List<Int>>
+
     @Query("SELECT * FROM products WHERE category = :category")
     fun getProductsByCategory(category: String): LiveData<List<ProductEntity>>
 

@@ -18,8 +18,8 @@
         <ImageView
             android:padding="10dp"
             android:id="@+id/imageProduct"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:src="@drawable/bg_btn_grey_round" />
 
@@ -50,7 +50,7 @@
                 android:paddingTop="4dp"/>
 
             <TextView
-                android:textColor="@color/black"
+                android:textColor="@color/orange"
                 android:id="@+id/textPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

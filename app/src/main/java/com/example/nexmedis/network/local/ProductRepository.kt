@@ -22,6 +22,8 @@ class ProductRepository(private val productDao: ProductDao) {
         return productDao.isFavorite(id)
     }
 
+    fun getIdProduct()=productDao.getIdProducts()
+
     suspend fun deleteFav(id: Int){
         productDao.deleteFav(id)
     }

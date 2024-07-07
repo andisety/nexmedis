@@ -68,8 +68,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="TextView"
-                android:textColor="@color/black"
-                android:textSize="23sp"
+                android:textColor="@color/orange"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
             <ImageView

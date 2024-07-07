@@ -19,6 +19,7 @@ class NexViewModel:ViewModel() {
     private val _filteredProducts = MutableLiveData<List<ResponseProductsItem>>()
     val filteredProducts: LiveData<List<ResponseProductsItem>> get() = _filteredProducts
 
+
     init {
         getProducts()
     }
@@ -57,6 +58,8 @@ class NexViewModel:ViewModel() {
             productsList.filter { it.title.contains(title) }
         }
     }
+
+
 
 //    fun seachProducts(query: String) {
 //        val currentList = (_products.value as? ApiResult.Success<List<ResponseProductsItem>>)?.data ?: return

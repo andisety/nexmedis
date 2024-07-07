@@ -45,7 +45,8 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         viewModelScope.launch {
             repository.deleteFav(id)
         }
-
     }
+
+    fun getIdProduct()=repository.getIdProduct()
 }
 
