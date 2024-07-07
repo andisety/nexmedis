@@ -18,6 +18,9 @@ interface ProductDao {
     @Query("SELECT * FROM products WHERE category = :category")
     fun getProductsByCategory(category: String): LiveData<List<ProductEntity>>
 
-    @Query("DELETE FROM products")
-     fun deleteAll()
+    @Query("DELETE FROM products WHERE id =:id")
+     suspend fun deleteFav(id: Int)
+
+    @Query("SELECT EXISTS(SELECT * FROM products WHERE id =:id)")
+    fun isFavorite(id: Int): LiveData<Boolean>
 }

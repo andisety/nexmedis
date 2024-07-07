@@ -37,13 +37,15 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
             repository.getAllProducts()
         }
 
+    fun isFavorite(id:Int):LiveData<Boolean>{
+        return repository.isFavorite(id)
+    }
+
+    fun delete(id:Int){
+        viewModelScope.launch {
+            repository.deleteFav(id)
+        }
+
+    }
 }
-//class ViewModelFactory(private val repository: ProductRepository) : ViewModelProvider.Factory {
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        if (modelClass.isAssignableFrom(ProductViewModel::class.java)) {
-//            @Suppress("UNCHECKED_CAST")
-//            return ProductViewModel(repository) as T
-//        }
-//        throw IllegalArgumentException("Unknown ViewModel class")
-//    }
-//}
+

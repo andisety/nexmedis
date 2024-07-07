@@ -18,6 +18,14 @@ class ProductRepository(private val productDao: ProductDao) {
       fun getAllProducts()=
         productDao.getAllProducts()
 
+    fun isFavorite(id:Int):LiveData<Boolean>{
+        return productDao.isFavorite(id)
+    }
+
+    suspend fun deleteFav(id: Int){
+        productDao.deleteFav(id)
+    }
+
 
 
 }
