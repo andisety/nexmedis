@@ -1,10 +1,12 @@
 <!-- res/layout/item_grid.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     tools:background="@color/white"
+    android:layout_marginBottom="20dp"
     android:padding="8dp">
 
 <RelativeLayout
@@ -25,33 +27,57 @@
 
 
     <TextView
+        android:paddingHorizontal="10dp"
         android:id="@+id/itemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="Item Name"
         android:textSize="16sp"
-        android:textColor="@color/grey"
-        android:textStyle="bold" />
-
-    <RatingBar
-        android:id="@+id/itemRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:numStars="5"
-        android:backgroundTint="@color/yellow"
-        android:progressTint="@color/yellow"
-        android:stepSize="0.5"
-        android:rating="4.5"
-        style="?android:attr/ratingBarStyleSmall" />
-
-    <TextView
-        android:id="@+id/itemPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:text="Item Price"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+         />
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingHorizontal="10dp"
+            android:text="Item Price"
+            android:textColor="@color/orange"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:layout_marginEnd="10dp"
+            android:id="@+id/itemRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="Item Price"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_marginRight="5dp"
+            android:paddingTop="5dp"
+            android:src="@drawable/star"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/itemRating"
+            app:layout_constraintEnd_toStartOf="@+id/itemRating"
+            app:layout_constraintTop_toTopOf="@+id/itemRating" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

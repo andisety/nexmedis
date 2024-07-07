@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.home -> viewPager.currentItem = 0
                 R.id.favorite -> viewPager.currentItem = 1
-                R.id.profile -> viewPager.currentItem = 2
             }
             true
         }
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
                 when (position) {
                     0 -> bottomNavigationView.selectedItemId = R.id.home
                     1 -> bottomNavigationView.selectedItemId = R.id.favorite
-                    2 -> bottomNavigationView.selectedItemId = R.id.profile
                 }
             }
         })

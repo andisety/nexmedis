@@ -25,7 +25,7 @@ class ProductsAdapter(
         val itemImage: ImageView = view.findViewById(R.id.itemImage)
         val itemImageBg: RelativeLayout = view.findViewById(R.id.bgImg)
         val itemName: TextView = view.findViewById(R.id.itemName)
-        val itemRating: RatingBar = view.findViewById(R.id.itemRating)
+        val itemRating: TextView = view.findViewById(R.id.itemRating)
         val itemPrice: TextView = view.findViewById(R.id.itemPrice)
     }
 
@@ -36,14 +36,14 @@ class ProductsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val bgRes = if (position % 2 == 0) R.drawable.bg_left else R.drawable.bg_right
+        val bgRes = if (position % 2 == 0) R.drawable.bg_left_shadow_png else R.drawable.bg_right_shdow_png
         holder.itemImageBg.setBackgroundResource(bgRes)
         val item = products[position]
         Picasso.get()
             .load(item.image)
             .into(holder.itemImage)
         holder.itemName.text = item.title
-        holder.itemRating.rating = item.rating.rate.toFloat()
+        holder.itemRating.text = item.rating.rate.toString()
         holder.itemPrice.text = "$${item.price.toString()}"
         holder.itemView.setOnClickListener {
             listener.onKlik(item)

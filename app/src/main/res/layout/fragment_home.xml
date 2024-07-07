@@ -35,7 +35,7 @@
         android:clickable="true"
         android:iconifiedByDefault="false"
         android:layout_toEndOf="@+id/tvProlog"
-        android:background="@drawable/bg_btn_black_round"
+        android:background="@drawable/bg_search_black_round"
         app:queryHint="Search products"/>
 
 <HorizontalScrollView
@@ -107,9 +107,13 @@
         android:layout_marginBottom="80dp"
         android:layout_marginLeft="10dp"
         android:id="@+id/recyclerView"
+
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/wrapperChipGrp" />
+        android:layout_below="@+id/wrapperChipGrp"
+
+        />
 
 </RelativeLayout>

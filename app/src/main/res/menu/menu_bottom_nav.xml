@@ -8,9 +8,5 @@
         android:id="@+id/favorite"
         android:icon="@drawable/favorite"
         android:title="Favorite"/>
-    <item
-        android:id="@+id/profile"
-        android:icon="@drawable/profile"
-        android:title="Profile"/>
 
 </menu>
