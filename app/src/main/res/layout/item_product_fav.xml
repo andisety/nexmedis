@@ -48,16 +48,36 @@
                 android:textSize="14sp"
                 android:textColor="@android:color/darker_gray"
                 android:paddingTop="4dp"/>
-
-            <TextView
-                android:textColor="@color/orange"
-                android:id="@+id/textPrice"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Price"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="8dp"/>
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:text="Price"
+                    android:textColor="@color/orange"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_trash"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_trash"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </LinearLayout>
 

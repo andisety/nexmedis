@@ -48,5 +48,11 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun getIdProduct()=repository.getIdProduct()
+
+    fun delleteAll(){
+        viewModelScope.launch {
+            repository.delleteAll()
+        }
+    }
 }
 

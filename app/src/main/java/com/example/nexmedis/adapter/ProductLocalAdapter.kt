@@ -19,6 +19,7 @@ class ProductLocalAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)  {
         var itemName: TextView = view.findViewById(R.id.textTitle)
         val itemImage: ImageView = view.findViewById(R.id.imageProduct)
+        val itemImageTrash: ImageView = view.findViewById(R.id.iv_trash)
         val itemCat: TextView = view.findViewById(R.id.textCategory)
         val itemPrice: TextView = view.findViewById(R.id.textPrice)
     }
@@ -37,6 +38,9 @@ class ProductLocalAdapter(
         holder.itemName.text = item.title
         holder.itemCat.text = item.category
         holder.itemPrice.text = "$${item.price}"
+        holder.itemImageTrash.setOnClickListener {
+            listener.onKlik(item)
+        }
         Glide.with(holder.itemView.context).load(item.image).into(holder.itemImage)
     }
 

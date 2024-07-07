@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,9 +39,30 @@ class FavoriteFragment : Fragment() {
         productViewModel= ViewModelProvider(this).get(ProductViewModel::class.java)
 
         productViewModel.allData.observe(viewLifecycleOwner, Observer {
-//            listProduct=it
            setupRecyclerView(it)
+            if (it.isEmpty()){
+                binding.apply {
+                    ivClear.visibility = View.GONE
+                    tvClear.visibility =View.GONE
+                    tvEmpty.visibility = View.VISIBLE
+                }
+            }else{
+                binding.apply {
+                    ivClear.visibility = View.VISIBLE
+                    tvClear.visibility =View.VISIBLE
+                    tvEmpty.visibility = View.GONE
+                }
+            }
         })
+
+        binding.apply {
+            ivClear.setOnClickListener {
+                productViewModel.delleteAll()
+            }
+            tvClear.setOnClickListener {
+                productViewModel.delleteAll()
+            }
+        }
 
 
 
@@ -53,7 +75,8 @@ class FavoriteFragment : Fragment() {
         recyclerView.layoutManager=LinearLayoutManager(requireContext())
         productLocalAdapter = ProductLocalAdapter(productEntity,object : ProductLocalAdapter.ListenerProductLocal{
             override fun onKlik(product: ProductEntity) {
-                TODO("Not yet implemented")
+               productViewModel.delete(product.id)
+                Toast.makeText(requireContext(),"Success Delete",Toast.LENGTH_SHORT).show()
             }
         })
         recyclerView.adapter = productLocalAdapter

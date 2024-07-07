@@ -28,6 +28,10 @@ class ProductRepository(private val productDao: ProductDao) {
         productDao.deleteFav(id)
     }
 
+    suspend fun delleteAll(){
+        productDao.delleteAll()
+    }
+
 
 
 }

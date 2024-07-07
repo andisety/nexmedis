@@ -8,6 +8,19 @@
     android:padding="20dp"
     tools:context=".fragment.FavoriteFragment">
 
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="-Empty-"/>
+
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/textView"
@@ -19,14 +32,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ImageView
+        android:id="@+id/iv_clear"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/baseline_clear_all_24"
+        app:layout_constraintEnd_toStartOf="@+id/tvClear"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/tvClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="clear all"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_clear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_clear" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcListFav"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_clear" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

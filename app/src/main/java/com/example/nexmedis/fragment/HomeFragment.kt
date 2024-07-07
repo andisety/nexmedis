@@ -50,12 +50,9 @@ class HomeFragment : Fragment() {
         setUpRecyclerView()
         setUpChipGroup()
 
-
         producViewModel.getIdProduct().observe(viewLifecycleOwner){listIdProduct->
             listId=listIdProduct
         }
-
-
 
         val searchView=binding.searchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -144,7 +141,6 @@ class HomeFragment : Fragment() {
                 products.id in listId }
         productsAdapter.filterList(filteredList)
     }
-
 
     private fun searchByTitle(title: String,products:List<ResponseProductsItem>) {
         val filteredList = products.filter { it.title.contains(title,ignoreCase = true)}

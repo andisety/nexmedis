@@ -26,4 +26,7 @@ interface ProductDao {
 
     @Query("SELECT EXISTS(SELECT * FROM products WHERE id =:id)")
     fun isFavorite(id: Int): LiveData<Boolean>
+
+    @Query("DELETE FROM products")
+    suspend fun delleteAll()
 }
